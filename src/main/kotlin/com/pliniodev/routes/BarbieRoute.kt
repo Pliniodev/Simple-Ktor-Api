@@ -10,7 +10,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
-import org.kodein.di.ktor.di
 
 fun Route.barbies() {
     val barbieServices by closestDI().instance<BarbieServices>()
@@ -21,8 +20,14 @@ fun Route.barbies() {
     }
 
     get("randombarbie") {
-        val allBarbies = barbieServices.getAllBarbies()
-        call.respond(allBarbies)
+        val allBarbies = barbieServices.getRandomBarbie()
+        if (allBarbies == null) {
+            call.respondText(
+                text = "Haven't barbies to show",
+                status = HttpStatusCode.NotFound)
+        } else {
+            call.respond(allBarbies)
+        }
     }
 
     post("addbarbie") {
@@ -30,7 +35,10 @@ fun Route.barbies() {
         barbieServices.addBarbie(barbieRequest)
         call.respondText("Barbie created", status = HttpStatusCode.Created)
         if (barbieRequest.description?.length!! > 1000)
-            call.respondText("description must be smaller than 1000 characters", status = HttpStatusCode.NotAcceptable)
+            call.respondText(
+                text = "description must be smaller than 1000 characters",
+                status = HttpStatusCode.NotAcceptable
+            )
     }
 
     delete("barbie/{id}") {

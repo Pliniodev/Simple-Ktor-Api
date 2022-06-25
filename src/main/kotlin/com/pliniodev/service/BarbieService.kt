@@ -7,7 +7,7 @@ interface BarbieService {
 
     fun getAllBarbies() : Iterable<Barbie>
 
-    fun getRandomBarbie() : Barbie
+    fun getRandomBarbie() : Barbie?
 
     fun addBarbie(barbie: Barbie) : BarbieEntity
 

@@ -2,6 +2,7 @@ package com.pliniodev.service
 
 import com.pliniodev.data.model.Barbie
 import com.pliniodev.data.model.BarbieEntity
+import io.ktor.server.plugins.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class BarbieServices : BarbieService {
@@ -10,7 +11,8 @@ class BarbieServices : BarbieService {
     }
 
     override fun getRandomBarbie() = transaction{
-        BarbieEntity.all().map(BarbieEntity::toBarbie).random()
+        val allBarbies = BarbieEntity.all().map(BarbieEntity::toBarbie)
+        if (allBarbies.isNotEmpty()) allBarbies.random() else null
     }
 
     override fun addBarbie(barbie: Barbie) = transaction  {
