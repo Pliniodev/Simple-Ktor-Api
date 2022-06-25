@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.Table
 
 object Barbies: IntIdTable() {
     val name = varchar("name", 255)
-    val description = varchar("description", 255)
+    val description = varchar("description", 1000)
     val imageUrl = varchar("imageUrl", 255)
 }
 
@@ -28,7 +28,7 @@ class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
 
 @Serializable
 data class Barbie(
-    val id: Int,
+    val id: Int? = null,
     val name: String,
     val description: String? = null,
     val imageUrl: String,

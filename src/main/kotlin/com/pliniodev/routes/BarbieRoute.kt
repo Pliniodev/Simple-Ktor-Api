@@ -28,7 +28,9 @@ fun Route.barbies() {
     post("addbarbie") {
         val barbieRequest = call.receive<Barbie>()
         barbieServices.addBarbie(barbieRequest)
-        call.respond(HttpStatusCode.Accepted)
+        call.respondText("Barbie created", status = HttpStatusCode.Created)
+        if (barbieRequest.description?.length!! > 1000)
+            call.respondText("description must be smaller than 1000 characters", status = HttpStatusCode.NotAcceptable)
     }
 
     delete("barbie/{id}") {
