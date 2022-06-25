@@ -12,7 +12,7 @@ import io.ktor.util.*
 import org.jetbrains.exposed.dao.exceptions.EntityNotFoundException
 import org.kodein.di.ktor.di
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args) {}
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @JvmOverloads
 @Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
