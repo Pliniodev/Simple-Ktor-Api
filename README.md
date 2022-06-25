@@ -3,15 +3,15 @@ Simple project to study ktor
 
 Study observations to me
 
-## 1) Procfile to deploy
+### 1) Procfile to deploy
 The template procfile necessary to push to heroku is
 
-web: ./build/install/<projectname>/bin/<projectname>
+web: ./build/install/[projectname]/bin/[projectname]
 
-Where <projectname> is name find at settings.gradle, is this project for example
+Where [projectname] is name find in settings.gradle, on this project for example
 this name is "com.pliniodev.ktor-sample"
 
-## 2) Code rotine to heroku
+### 2) Code rotine to heroku
 
 `heroku login` 
 
@@ -24,7 +24,7 @@ To start Procfile
 To open the application
 `heroku open`
 
-## 3) Some used links to find solutions
+### 3) Some used links to find solutions
 https://ktor.io/docs/status-pages.html#install_plugin
 
 https://ktor.io/docs/interactive-website-add-persistence.html#model
