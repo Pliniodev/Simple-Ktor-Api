@@ -2,7 +2,10 @@ package com.pliniodev.service
 
 import com.pliniodev.data.model.Barbie
 import com.pliniodev.data.model.BarbieEntity
+import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.plugins.*
+import io.ktor.server.response.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class BarbieServices : BarbieService {
@@ -28,4 +31,5 @@ class BarbieServices : BarbieService {
         BarbieEntity[id].delete()
     }
 
+    override fun searchBarbie(name: String) = getAllBarbies().filter { it.name == name }
 }

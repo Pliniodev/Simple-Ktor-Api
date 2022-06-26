@@ -1,6 +1,7 @@
 package com.pliniodev.routes
 
 import com.pliniodev.data.model.Barbie
+import com.pliniodev.data.model.BarbieEntity
 import com.pliniodev.service.BarbieServices
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -8,6 +9,7 @@ import io.ktor.server.plugins.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.util.*
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 
@@ -45,5 +47,14 @@ fun Route.barbies() {
         val barbieId = call.parameters["id"]?.toIntOrNull() ?: throw NotFoundException("Barbie not found")
         barbieServices.deleteBarbie(barbieId)
         call.respond(HttpStatusCode.OK)
+    }
+
+    get("barbie/{name}") {
+        val name = call.parameters["name"] ?: return@get call.respondText(
+            text = "Missing barbie name",
+            status = HttpStatusCode.BadRequest
+        )
+        val barbie = barbieServices.searchBarbie(name)
+        call.respond(barbie)
     }
 }

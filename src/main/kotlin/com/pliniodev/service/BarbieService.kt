@@ -12,4 +12,6 @@ interface BarbieService {
     fun addBarbie(barbie: Barbie) : BarbieEntity
 
     fun deleteBarbie(id: Int)
+
+    fun searchBarbie(name: String): List<Barbie>
 }
