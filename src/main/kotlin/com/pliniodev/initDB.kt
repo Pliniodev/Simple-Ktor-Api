@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
 fun initDB() {
-    Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
+    Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;", "org.h2.Driver")
     LoggerFactory.getLogger(Application::class.simpleName).info("Initialized Database")
 
     createTables()

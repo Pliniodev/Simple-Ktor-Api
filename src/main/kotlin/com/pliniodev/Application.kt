@@ -20,15 +20,9 @@ fun Application.module() {
 
     initDB()
 
-//    configureRouting()
     configureSerialization()
     configureMonitoring()
-
-    install(StatusPages) {
-        exception { call, entityNotFoundException: EntityNotFoundException ->
-            call.respond(entityNotFoundException)
-        }
-    }
+    configureStatusPages()
 
     di { bindServices() }
     routing { apiRoute() }
