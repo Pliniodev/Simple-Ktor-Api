@@ -12,6 +12,7 @@ object Barbies: IntIdTable() {
     val name = varchar("name", 255)
     val description = varchar("description", 1000)
     val imageUrl = varchar("imageUrl", 255)
+    val barbieType = varchar("barbieType", 255)
 }
 
 class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
@@ -20,10 +21,11 @@ class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
     var name by Barbies.name
     var description by Barbies.description
     var imageUrl by Barbies.imageUrl
+    var barbieType by Barbies.barbieType
 
-    override fun toString(): String = "Barbie($name, $description, $imageUrl)"
+    override fun toString(): String = "Barbie($name, $description, $imageUrl, $barbieType)"
 
-    fun toBarbie() = Barbie(id.value, name, description, imageUrl)
+    fun toBarbie() = Barbie(id.value, name, description, imageUrl, barbieType)
 }
 
 @Serializable
@@ -32,5 +34,6 @@ data class Barbie(
     val name: String,
     val description: String? = null,
     val imageUrl: String,
+    val barbieType: String? = null,
 )
 

@@ -20,6 +20,7 @@ class BarbieServices : BarbieService {
             this.name = barbie.name
             this.description = barbie.description.orEmpty()
             this.imageUrl = barbie.imageUrl
+            this.barbieType = barbie.barbieType.orEmpty()
         }
     }
 
