@@ -31,5 +31,5 @@ class BarbieServices : BarbieService {
         BarbieEntity[id].delete()
     }
 
-    override fun searchBarbie(name: String) = getAllBarbies().filter { it.name == name }
+    override fun searchBarbie(name: String) = getAllBarbies().filter { it.name.lowercase().contains(name.lowercase()) }
 }
