@@ -2,13 +2,10 @@ package com.pliniodev.service
 
 import com.pliniodev.data.model.Barbie
 import com.pliniodev.data.model.BarbieEntity
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.plugins.*
-import io.ktor.server.response.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class BarbieServices : BarbieService {
+class DAOBarbieImpl : DAOBarbie {
+
     override fun getAllBarbies(): Iterable<Barbie> = transaction {
         BarbieEntity.all().map(BarbieEntity::toBarbie)
     }
@@ -21,9 +18,9 @@ class BarbieServices : BarbieService {
     override fun addBarbie(barbie: Barbie) = transaction  {
         BarbieEntity.new {
             this.name = barbie.name
-            this.description = barbie.description.orEmpty()
+            this.description = barbie.description
             this.imageUrl = barbie.imageUrl
-            this.barbieType = barbie.barbieType.orEmpty()
+            this.barbieModel = barbie.barbieModel
         }
     }
 
@@ -31,5 +28,13 @@ class BarbieServices : BarbieService {
         BarbieEntity[id].delete()
     }
 
-    override fun searchBarbie(name: String) = getAllBarbies().filter { it.name.lowercase().contains(name.lowercase()) }
+    override fun searchBarbieByName(name: String) =
+        getAllBarbies().filter { it.name.lowercase().contains(name.lowercase()) }
+
+    override fun searchBarbieByModel(type: String) =
+        getAllBarbies().filter { it.barbieModel.lowercase().contains(type.lowercase()) }
+
+    override fun updateDescription(id: Int, description: String) = transaction {
+         BarbieEntity[id].description = description
+    }
 }

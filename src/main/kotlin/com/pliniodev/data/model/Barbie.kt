@@ -5,14 +5,12 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
-import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.Table
 
 object Barbies: IntIdTable() {
     val name = varchar("name", 255)
     val description = varchar("description", 1000)
     val imageUrl = varchar("imageUrl", 255)
-    val barbieType = varchar("barbieType", 255)
+    val barbieModel = varchar("barbieModel", 255)
 }
 
 class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
@@ -21,19 +19,19 @@ class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
     var name by Barbies.name
     var description by Barbies.description
     var imageUrl by Barbies.imageUrl
-    var barbieType by Barbies.barbieType
+    var barbieModel by Barbies.barbieModel
 
-    override fun toString(): String = "Barbie($name, $description, $imageUrl, $barbieType)"
+    override fun toString(): String = "Barbie($name, $description, $imageUrl, $barbieModel)"
 
-    fun toBarbie() = Barbie(id.value, name, description, imageUrl, barbieType)
+    fun toBarbie() = Barbie(id.value, name, description, imageUrl, barbieModel)
 }
 
 @Serializable
 data class Barbie(
     val id: Int? = null,
-    val name: String,
-    val description: String? = null,
-    val imageUrl: String,
-    val barbieType: String? = null,
+    val name: String = "",
+    var description: String = "",
+    val imageUrl: String = "",
+    val barbieModel: String = "generic",
 )
 
