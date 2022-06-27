@@ -29,6 +29,10 @@ https://ktor.io/docs/status-pages.html#install_plugin
 
 https://ktor.io/docs/interactive-website-add-persistence.html#model
 
+https://ktor.io/docs/html-dsl.html#templates
+
+https://github.com/Kotlin/kotlinx.html
+
 https://bettercoding.dev/kotlin/ktor-rest-api-exposed/
 
 https://dev.to/kotlin/publishing-server-side-kotlin-applications-ktor-on-heroku-2ce4
