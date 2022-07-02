@@ -43,3 +43,8 @@ https://ishroid.medium.com/ktor-database-connection-with-h2-ktor-and-exposed-100
 
 https://medium.com/@dariopellegrini/deploy-a-kotlin-server-in-minutes-using-ktor-and-heroku-ed6ed33337f
 
+how add postgresql db in heroku
+https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java
+
+how connect to pgadmin
+https://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin

@@ -3,8 +3,6 @@ package com.pliniodev.routes
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
-import io.ktor.server.response.*
-import io.ktor.server.response.respondText
 import io.ktor.server.routing.*
 import kotlinx.html.*
 
@@ -25,8 +23,8 @@ fun Route.homeRoute() {
                     p {
                         +"Hello this is the barbie api home :)"
                     }
-                    a("https://kotlinlang.org") {
-                        +"please see the documentation here"
+                    a("https://app.getpostman.com/run-collection/19092765-40e6fc2b-f3ab-4178-9c0c-748e61a627a9?action=collection%2Ffork&collection-url=entityId%3D19092765-40e6fc2b-f3ab-4178-9c0c-748e61a627a9%26entityType%3Dcollection%26workspaceId%3D360b7237-0065-4ccb-9f5d-390c64cb9b04") {
+                        +"Fork the postman collection here"
                     }
                 }
             }
