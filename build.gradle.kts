@@ -4,11 +4,13 @@ val logback_version: String by project
 val exposed_version: String by project
 val kodein_version: String by project
 val h2database_version: String by project
+val postgresql_version: String by project
+val hikari_version: String by project
 
 plugins {
     application
     kotlin("jvm") version "1.7.0"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.7.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.0"
 }
 
 group = "com.pliniodev"
@@ -46,8 +48,14 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
 
+    //hikari
+    implementation("com.zaxxer:HikariCP:$hikari_version")
+
     //h2database
-    implementation("com.h2database:h2:$h2database_version")
+//    implementation("com.h2database:h2:$h2database_version")
+
+    //postgresql
+    implementation("org.postgresql:postgresql:$postgresql_version")
 
     // kodein for ktor
     implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodein_version")

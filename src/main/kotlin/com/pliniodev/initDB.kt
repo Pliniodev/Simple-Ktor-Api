@@ -1,19 +1,29 @@
 package com.pliniodev
 
 import com.pliniodev.data.model.Barbies
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
-fun initDB() {
-    Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
-    LoggerFactory.getLogger(Application::class.simpleName).info("Initialized Database")
+object DbFactory {
+    fun init() {
+        val pool = hikari()
+        val database = Database.connect(pool)
 
-    createTables()
-}
+        createTables(database)
+        LoggerFactory.getLogger(Application::class.simpleName).info("Initialized Database")
+    }
 
-private fun createTables() = transaction {
-    SchemaUtils.create(Barbies)
+    private fun hikari(): HikariDataSource {
+        val hikariConfig = HikariConfig("hikari.properties")
+        return HikariDataSource(hikariConfig)
+    }
+
+    private fun createTables(database: Database) = transaction(database) {
+        SchemaUtils.create(Barbies)
+    }
 }
