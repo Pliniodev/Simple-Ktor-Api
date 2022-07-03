@@ -1,13 +1,17 @@
-package com.pliniodev.service
+package com.pliniodev.dao.barbie
 
 import com.pliniodev.data.model.Barbie
 import com.pliniodev.data.model.BarbieEntity
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class DAOBarbieImpl : DAOBarbie {
 
     override fun getAllBarbies(): Iterable<Barbie> = transaction {
-        BarbieEntity.all().map(BarbieEntity::toBarbie)
+      BarbieEntity.all()
+            .map(BarbieEntity::toBarbie)
+            .sortedBy { it.id }
     }
 
     override fun getRandomBarbie() = transaction {
@@ -46,6 +50,7 @@ class DAOBarbieImpl : DAOBarbie {
         getAllBarbies().filter { it.barbieModel.lowercase().contentEquals(barbieModel.lowercase()) }
 
     override fun updateDescription(id: Int, description: String) = transaction {
+        addLogger(StdOutSqlLogger)
         BarbieEntity[id].description = description
     }
 }

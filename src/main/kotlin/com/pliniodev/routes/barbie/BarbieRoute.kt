@@ -1,8 +1,8 @@
-package com.pliniodev.routes
+package com.pliniodev.routes.barbie
 
 import com.pliniodev.data.model.Barbie
-import com.pliniodev.routes.BarbieValidator.isAcceptable
-import com.pliniodev.service.DAOBarbieImpl
+import com.pliniodev.routes.barbie.BarbieValidator.validateAndRespond
+import com.pliniodev.dao.barbie.DAOBarbieImpl
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
@@ -16,8 +16,7 @@ fun Route.barbies() {
     val service by closestDI().instance<DAOBarbieImpl>()
 
     get("barbies") {
-        val allBarbies = service.getAllBarbies()
-        call.respond(allBarbies)
+        call.respond(service.getAllBarbies())
     }
 
     get("randombarbie") {
@@ -32,21 +31,14 @@ fun Route.barbies() {
 
     post("addbarbie") {
         val barbieToAdd = call.receive<Barbie>()
-        val (message, isAcceptable) = barbieToAdd.isAcceptable()
-        if (isAcceptable) {
-            service.addBarbie(barbieToAdd)
-            call.respondText(message, status = HttpStatusCode.Created)
-        }
-        else call.respondText(message, status = HttpStatusCode.Created)
+        val isAcceptable = call.validateAndRespond(barbieToAdd)
+        if (isAcceptable) service.addBarbie(barbieToAdd)
     }
 
     post("addbarbies") {
         val barbiesToAdd = call.receive<List<Barbie>>()
-        val (message, isAcceptable) = barbiesToAdd.isAcceptable()
-        if (isAcceptable) {
-            service.addAllBarbies(barbiesToAdd)
-            call.respondText(message, status = HttpStatusCode.Created)
-        } else call.respondText(message, status = HttpStatusCode.NotAcceptable)
+        val isAcceptable = call.validateAndRespond(barbiesToAdd)
+        if (isAcceptable) service.addAllBarbies(barbiesToAdd)
     }
 
     delete("deletebarbie/{id}") {
@@ -80,17 +72,11 @@ fun Route.barbies() {
     }
 
     put("barbie/update/{description}") {
-        val barbieId = call.request.queryParameters["id"]?.toIntOrNull() ?: throw NotFoundException("Barbie not found")
-        val description = call.parameters["description"] ?: throw NotFoundException("Missing description to update")
-        val isDescriptionValid = description.length < 500 || description.isNotEmpty()
-        if (isDescriptionValid) {
+        val barbieId = call.request.queryParameters["id"]?.toIntOrNull()
+        val description = call.parameters["description"]
+        val isAcceptable = call.validateAndRespond(barbieId, description)
+        if (isAcceptable && barbieId != null && description != null) {
             service.updateDescription(barbieId, description)
-            call.respond(HttpStatusCode.Accepted)
-        } else {
-            call.respondText(
-                text = "Description must be smaller than 500 characters and can not be empty",
-                status = HttpStatusCode.NotAcceptable
-            )
         }
     }
 }

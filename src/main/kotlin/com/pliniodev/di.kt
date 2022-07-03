@@ -1,6 +1,6 @@
 package com.pliniodev
 
-import com.pliniodev.service.DAOBarbieImpl
+import com.pliniodev.dao.barbie.DAOBarbieImpl
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.singleton

@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object Barbies: IntIdTable() {
+object BarbieTable: IntIdTable() {
     val name = varchar("name", 255)
     val description = varchar("description", 500)
     val imageUrl = varchar("imageUrl", 255)
@@ -14,12 +14,12 @@ object Barbies: IntIdTable() {
 }
 
 class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
-    companion object : IntEntityClass<BarbieEntity>(Barbies)
+    companion object : IntEntityClass<BarbieEntity>(BarbieTable)
 
-    var name by Barbies.name
-    var description by Barbies.description
-    var imageUrl by Barbies.imageUrl
-    var barbieModel by Barbies.barbieModel
+    var name by BarbieTable.name
+    var description by BarbieTable.description
+    var imageUrl by BarbieTable.imageUrl
+    var barbieModel by BarbieTable.barbieModel
 
     override fun toString(): String = "Barbie($name, $description, $imageUrl, $barbieModel)"
 

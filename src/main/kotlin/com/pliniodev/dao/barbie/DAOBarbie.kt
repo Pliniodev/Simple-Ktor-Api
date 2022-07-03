@@ -1,4 +1,4 @@
-package com.pliniodev.service
+package com.pliniodev.dao.barbie
 
 import com.pliniodev.data.model.Barbie
 import com.pliniodev.data.model.BarbieEntity
