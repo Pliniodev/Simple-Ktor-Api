@@ -11,11 +11,13 @@ interface DAOBarbie {
 
     fun addBarbie(barbie: Barbie) : BarbieEntity
 
+    fun addAllBarbies(barbies: List<Barbie>) : List<BarbieEntity>
+
     fun deleteBarbie(id: Int)
 
     fun searchBarbieByName(name: String): List<Barbie>
 
-    fun searchBarbieByModel(type: String): List<Barbie>
+    fun searchBarbieByModel(barbieModel: String): List<Barbie>
 
     fun updateDescription(id: Int, description: String)
 }

@@ -48,3 +48,9 @@ https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-hero
 
 how connect to pgadmin
 https://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
+
+exposed info
+https://www.baeldung.com/kotlin/exposed-persistence
+
+more about exposed
+https://blog.jdriven.com/2019/07/kotlin-exposed-a-lightweight-sql-library/

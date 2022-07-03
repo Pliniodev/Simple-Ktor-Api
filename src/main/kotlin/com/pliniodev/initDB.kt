@@ -10,6 +10,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
 object DbFactory {
+//    postgres database
     fun init() {
         val pool = hikari()
         val database = Database.connect(pool)
@@ -26,4 +27,16 @@ object DbFactory {
     private fun createTables(database: Database) = transaction(database) {
         SchemaUtils.create(Barbies)
     }
+
+//    //h2 database
+//    fun initH2Db() {
+//        Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
+//        LoggerFactory.getLogger(Application::class.simpleName).info("Initialized Database")
+//
+//        createTables()
+//    }
+
+//    private fun createTables() = transaction {
+//        SchemaUtils.create(Barbies)
+//    }
 }

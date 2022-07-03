@@ -8,7 +8,7 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 
 object Barbies: IntIdTable() {
     val name = varchar("name", 255)
-    val description = varchar("description", 1000)
+    val description = varchar("description", 500)
     val imageUrl = varchar("imageUrl", 255)
     val barbieModel = varchar("barbieModel", 255)
 }
@@ -29,9 +29,9 @@ class BarbieEntity(id: EntityID<Int>): IntEntity(id) {
 @Serializable
 data class Barbie(
     val id: Int? = null,
-    val name: String = "",
+    val name: String,
     var description: String = "",
-    val imageUrl: String = "",
+    val imageUrl: String,
     val barbieModel: String = "generic",
 )
 
