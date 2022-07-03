@@ -51,9 +51,9 @@ dependencies {
     //hikari
     implementation("com.zaxxer:HikariCP:$hikari_version")
 
-////    h2database
+////    h2database to local tests
 //    implementation("com.h2database:h2:$h2database_version")
-////
+
     //postgresql
     implementation("org.postgresql:postgresql:$postgresql_version")
 
