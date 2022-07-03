@@ -1,9 +1,11 @@
 package com.pliniodev
 
-import io.ktor.server.application.*
-import com.pliniodev.plugins.*
+import io.ktor.server.application.Application
+import com.pliniodev.plugins.configureMonitoring
+import com.pliniodev.plugins.configureSerialization
+import com.pliniodev.plugins.configureStatusPages
 import com.pliniodev.routes.apiRoute
-import io.ktor.server.routing.*
+import io.ktor.server.routing.routing
 import org.kodein.di.ktor.di
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
